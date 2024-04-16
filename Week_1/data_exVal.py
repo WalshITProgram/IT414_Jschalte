@@ -1,7 +1,6 @@
 import pyperclip
 import re
 
-
 def main():
     """
     Retrieve data from clipboard, extract Coord, Dollar, and CC_Num using regular expressions,
@@ -20,7 +19,13 @@ def main():
     dollars = dollars_regex.findall(data)
     cc_nums = cc_num_regex.findall(data)
 
-    # Format the extracted dataq
+    # Ensure all lists have the same length
+    min_length = min(len(coords), len(dollars), len(cc_nums))
+    coords = coords[:min_length]
+    dollars = dollars[:min_length]
+    cc_nums = cc_nums[:min_length]
+
+    # Format the extracted data
     formatted_data = [f"{coord} | {dollar} | {cc_num}" for coord, dollar, cc_num in zip(coords, dollars, cc_nums)]
 
     # Joining the formatted data
