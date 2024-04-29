@@ -9,7 +9,7 @@ def create_destination_folder(destination: str):
     """
     if not os.path.exists(destination):
         os.makedirs(destination)
-        log_action(f"Folder created: {destination}", destination)
+        log_action(f"Folder created: {destination}")
 
 def copy_files(source: str, destination: str):
     """Copy files from source to destination.
@@ -18,36 +18,42 @@ def copy_files(source: str, destination: str):
         source (str): The path to the source folder.
         destination (str): The path to the destination folder.
     """
-    for root, _, files in os.walk(source):
+    for root, dirs, files in os.walk(source):
         for file in files:
             source_file = os.path.join(root, file)
-            destination_file = os.path.join(destination, os.path.relpath(source_file, source))
             if os.path.getsize(source_file) <= 1e9:  # 1 GB limit
                 try:
+                    relative_path = os.path.relpath(root, source)
+                    destination_folder = os.path.join(destination, relative_path)
+                    destination_file = os.path.join(destination_folder, file)
+                    
+                    if not os.path.exists(destination_folder):
+                        os.makedirs(destination_folder)
                     shutil.copy2(source_file, destination_file)
-                    log_action(f"File copied: {file} to {destination_file}", destination)
+                    log_action(f"File copied: {file} to {destination_file}")
                 except Exception as e:
-                    log_action(f"Error copying {file}: {str(e)}", destination)
+                    log_action(f"Error copying {file}: {str(e)}")
             else:
-                log_action(f"Skipped: {file} (file size exceeds 1 GB)", destination)
+                log_action(f"Skipped: {file} (file size exceeds 1 GB)")
 
-def log_action(action: str, destination: str):
+def log_action(action: str):
     """Log actions to log.txt file.
 
     Args:
         action (str): The action to be logged.
-        destination (str): The path to the destination folder.
     """
-    with open(os.path.join(destination, "log.txt"), "a") as log_file:
+    with open("log.txt", "a") as log_file:
         log_file.write(action + "\n")
 
 def main():
     source = input("Enter the source folder: ")
     destination = input("Enter the destination folder: ")
 
+    # Check if source folder exists
     if not os.path.exists(source):
         print("Source folder does not exist.")
         return
+
     create_destination_folder(destination)
 
     try:
@@ -56,6 +62,6 @@ def main():
         print("An error occurred:", str(e))
     else:
         print("Copy operation completed successfully.")
-        
+
 if __name__ == "__main__":
     main()
