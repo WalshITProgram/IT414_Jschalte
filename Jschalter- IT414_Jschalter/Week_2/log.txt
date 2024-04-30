@@ -1,4 +1,0 @@
-Folder created: Desktop\folder0
-File copied: Wiff.mp4 to Desktop\folder0\New folder\Wiff.mp4
-Folder created: C:\Users\Belay\Desktop\Big_Folder
-File copied: Wiff.mp4 to C:\Users\Belay\Desktop\Big_Folder\New folder\Wiff.mp4
