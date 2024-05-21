@@ -1,0 +1,18 @@
+<address_data>
+    <entry>
+        <first_name>John</first_name>
+        <last_name>Smith</last_name>
+        <street>123 Airport Rd.</street>
+        <city>Clinton Township</city>
+        <state>MI</state>
+        <zip>48035</zip>
+    </entry>
+    <entry>
+        <first_name>Sangeeta</first_name>
+        <last_name>Khalsa</last_name>
+        <street>36487 Main St.</street>
+        <city>Brighton</city>
+        <state>MI</state>
+        <zip>48116</zip>
+    </entry>
+</address_data>
