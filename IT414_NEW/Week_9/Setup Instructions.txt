@@ -1,0 +1,11 @@
+# Setup Instructions
+
+## Dependencies Installation
+First, ensure you have all the required libraries installed. You can install them using pip:
+
+pip install psutil smtplib twilio schedule
+
+Or
+
+```bash
+pip install -r requirements.txt
